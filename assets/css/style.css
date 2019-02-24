@@ -1,0 +1,42 @@
+body{
+    background-image: url('../images/world_map.jpg');
+}
+.textHeader{
+    text-align: center;
+    font-size: 16px;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+}
+.textColorBeige
+{
+    color: beige !important;
+}
+#tiriviaQuestionBox{
+    width: 70%;
+    min-height: 200px;
+    margin:0px auto;
+    background-color: beige;
+}
+.questionAnswer{
+    width: 100%;
+    padding: 1% 5%;
+    text-align: left;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 18px;
+}
+.finalAnswer
+{
+    width: 100%;
+    padding: 1% 5%;
+    text-align: center;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 18px;
+}
+.showTimer
+{
+    width: 100%;
+    padding: 1% 5%;
+    text-align: center;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 18px;
+    color: chocolate;
+}

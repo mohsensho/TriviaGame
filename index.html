@@ -1,0 +1,123 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="assets/images/triviaIcon.jpg">
+    <title>Star Wars</title>
+    <!-- Bootstrap core CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <!-- Custom styles for this template -->
+    <link href="assets/css/sticky-footer-navbar.css" rel="stylesheet">
+    <link href="assets/css/style.css" rel="stylesheet">
+  </head>
+
+  <body>
+
+    <header>
+      <!-- Fixed navbar -->
+      <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-brown text-center">
+        <p class="textHeader">History Trivia Gmae</p>
+      </nav>
+    </header>
+
+    <!-- Begin page content -->
+    <main role="main" class="container">
+      <div class="row" style="margin-top:4%;">
+        
+      </div>
+      <div class="row">
+        <div id="tiriviaQuestionBox" class="rounded">
+            <!--<div id="btnId" class="col text-center">
+              <button id="btnAttack" class="btn btn-warning btn-sm disabled">Start New Game!</button>
+            </div>-->
+            
+            <div id="questionId" class="questionAnswer">
+                In 1927, who became the first man to fly solo and non-stop across the Atlantic?
+            </div>
+            <div class="radio questionAnswer">
+              <label><input id="answ1" type="radio" name="optradio">Charles Lindbergh</label>
+            </div>
+            <div class="radio questionAnswer">
+              <label><input id="answ2" type="radio" name="optradio">Charles Bronson</label>
+            </div>
+            <div class="radio questionAnswer">
+              <label><input id="answ3" type="radio" name="optradio">Joseph Stalin</label>
+            </div>
+            <div class="radio questionAnswer">
+              <label><input id="answ4" type="radio" name="optradio">Micheal Lenin</label>
+            </div>
+            <div id="showTimer" class="showTimer"></div>
+            <script>
+              let i=30;
+              let interva3=setInterval(function(){ 
+                $("#showTimer").html("Be ready for next one in: "+i+" Seconds");
+                if(i==0){
+                  clearInterval(interva3);
+                }
+                i--;
+              }, 1000);
+            </script>
+            
+            <!--
+            <div id="questionId" class="finalAnswer">
+                Correct!/Wrong!
+                <br>
+                the correct answer is ???????
+                <div id="showTimer" class="showTimer"></div>
+                <script>
+                  let i=3;
+                  let interva3=setInterval(function(){ 
+                    $("#showTimer").html("Be ready for next one in: "+i+" Seconds");
+                    if(i==0){
+                      clearInterval(interva3);
+                    }
+                    i--;
+                  }, 1000);
+                </script>
+            </div>
+            -->
+            <!--
+
+            <div id="questionId" class="finalAnswer">
+                Result:
+                <br>
+                the total correct answer: <span id="totalCorrect">2</span>
+                <br>
+                the total wrong answer: <span id="totalWrong">5</span>
+                <br>
+                the total unanswered: <span id="totalUnanswered">1</span>
+                
+                <div id="showTimer" class="showTimer"></div>
+                <script>
+                  let i=3;
+                  let interva3=setInterval(function(){ 
+                    $("#showTimer").html("Be ready for next one in: "+i+" Seconds");
+                    if(i==0){
+                      clearInterval(interva3);
+                    }
+                    i--;
+                  }, 1000);
+                </script>
+            </div>-->
+        </div>
+        </div>
+    </main>
+
+    <footer class="footer bg-brown">
+      <div class="container text-center">
+        <span class="text-muted textColorBeige">All Rights Received &copy; MohsenSho</span>
+      </div>
+    </footer>
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <script src="assets/javascript/app.js"></script> 
+  </body>
+</html>
