@@ -1,2 +1,2 @@
 # TriviaGame
-The io link added to Bootstrap-Portfolio
+The TriviaGame added to Bootstrap-Portfolio 
