@@ -1,72 +1,169 @@
-var questionArr = new Array();
-questionArr[0] = new Array();
-questionArr[0][0] = "Question 1";
-questionArr[0][1] = "Answer 1";
-questionArr[0][2] = "Answer 2";
-questionArr[0][3] = "Answer 3";
-questionArr[0][4] = "Answer 4";
-questionArr[0][5] = "Correct Answer";
+let correctAnsw=0;
+let incorrectAnsw=0;
+let unanswered=0;
+let qNumber = 0 ;
+let timeCounter = 15;
+let interval_15 = 0;
+let isEndOfGame = false;
+let newGameIndex = 0;
 
-questionArr[1] = new Array();
-questionArr[1][0] = "Question 2";
-questionArr[1][1] = "Answer 1";
-questionArr[1][2] = "Answer 2";
-questionArr[1][3] = "Answer 3";
-questionArr[1][4] = "Answer 4";
-questionArr[1][5] = "Correct Answer";
+function showQ(qNumber){
+    $('#questionId').text(questionArr[qNumber][0]);
+    $('.radio').show();
+    $( "#answ1" ).prop( "checked", false );
+    $( "#answ2" ).prop( "checked", false );
+    $( "#answ3" ).prop( "checked", false );
+    $( "#answ4" ).prop( "checked", false );
+    $('#answ1').get(0).nextSibling.textContent = questionArr[qNumber][1];
+    $('#answ2').get(0).nextSibling.textContent = questionArr[qNumber][2];
+    $('#answ3').get(0).nextSibling.textContent = questionArr[qNumber][3];
+    $('#answ4').get(0).nextSibling.textContent = questionArr[qNumber][4];
 
-questionArr[2] = new Array();
-questionArr[2][0] = "Question 2";
-questionArr[2][1] = "Answer 1";
-questionArr[2][2] = "Answer 2";
-questionArr[2][3] = "Answer 3";
-questionArr[2][4] = "Answer 4";
-questionArr[2][5] = "Correct Answer";
+}
+function nextQuestion(){
+    timeCounter = 15;
+    newGameIndex = 0;
+    if(qNumber < questionArr.length){
+        showQ(qNumber);
+        qNumber++;
+    }else{
+        isEndOfGame = true;
+        clearInterval(interval_15);
+        $("#showTimer").html("");
+        $('.radio').hide();
+        $('#questionId').html("&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp Completed! Let's see the result");
+        $('#questionId').append('<br><p>The Correct answers: '+ correctAnsw + '</p>');
+        $('#questionId').append('<p>The Incorrect answers: '+ incorrectAnsw + '</p>');
+        $('#questionId').append('<p>The Unanswered: '+ unanswered + '</p><br>');
+    
+        interval_15 = setInterval(function(){
+            if(timeCounter>=0){
+                $("#showTimer").html("Be ready for new Game in: "+timeCounter+" Seconds");
+                timeCounter --;
+                newGameIndex ++;
+                if(newGameIndex == 16){
+                    clearInterval(interval_15);
+                    newGame();
+                }
+            }
+            
+        }, 1000);
+        
+    }
+    
+    
+}
+function newGame(){
+    correctAnsw=0;
+    incorrectAnsw=0;
+    unanswered=0;
+    qNumber = 0 ;
+    timeCounter = 15;
+    interval_15 = 0;
+    isEndOfGame = false; 
+    run();
+}
+function run()
+{
+    $("#showTimer").html("");
+    nextQuestion();
+    if(!isEndOfGame)
+    {
+        interval_15 = setInterval(function(){
+            if(timeCounter>=0){
+                $("#showTimer").html("Be ready for next one in: "+timeCounter+" Seconds");
+                timeCounter --;
+            }
+            else{
+                unansweredFunc(qNumber);
+                clearInterval(interval_15);
+            }
+            
+        }, 1000);
+    }
+}
+$('input:radio[name="optradio"]').change(
+    function(){
+        clearInterval(interval_15);
+        $("#showTimer").html("");
+        if ($(this).is(':checked')) {
+            if($(this).get(0).nextSibling.textContent == questionArr[qNumber-1][5]) // correct answer is selected
+            {
+               correctAnswer();
+            }
+            else{ // incorrect answer is selected
+                incorrectAnswer();
+            }
+        }
+});
+function correctAnswer(){
+    
+    $("#showTimer").html("");
+    $('.radio').hide();
+    correctAnsw++;
+    $('#questionId').html("&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp Congratulation! The Answer is Correct!");
+    $('#answ1').get(0).nextSibling.textContent = '';
+    $('#answ2').get(0).nextSibling.textContent = '';
+    $('#answ3').get(0).nextSibling.textContent = '';
+    $('#answ4').get(0).nextSibling.textContent = '';    
+    
+    timeCounter = 3;
+    let interval3_co = setInterval(function(){
+        if(timeCounter>0)
+        {
+            $("#showTimer").html("Be ready for next one in: "+timeCounter+" Seconds");
+            timeCounter--;
+        }
+        else{
+            clearInterval(interval3_co);
+            run();
+        }
+    }, 1000);
+}
+function incorrectAnswer(){
+    $("#showTimer").html("");
+    $('.radio').hide();
+    incorrectAnsw++;
+    $('#questionId').html("&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp Sorry! The Answer is incorrect!");
+    $('#answ1').get(0).nextSibling.textContent = '';
+    $('#answ2').get(0).nextSibling.textContent = '';
+    $('#answ3').get(0).nextSibling.textContent = '';
+    $('#answ4').get(0).nextSibling.textContent = '';   
 
-questionArr[3] = new Array();
-questionArr[3][0] = "Question 2";
-questionArr[3][1] = "Answer 1";
-questionArr[3][2] = "Answer 2";
-questionArr[3][3] = "Answer 3";
-questionArr[3][4] = "Answer 4";
-questionArr[3][5] = "Correct Answer";
+    timeCounter = 3; 
+    let interval3_in = setInterval(function(){
+        if(timeCounter>0)
+        {
+            $("#showTimer").html("Be ready for next one in: "+timeCounter+" Seconds");
+            timeCounter--;
+        }
+        else{
+            clearInterval(interval3_in);
+            run();
+        }
+    }, 1000);
+}
+function unansweredFunc(qNumber1){
+    $("#showTimer").html("");
+    $('.radio').hide();
+    unanswered++;
+    $('#questionId').html("&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp The Answer is: "+questionArr[qNumber1-1][5]);
+    $('#answ1').get(0).nextSibling.textContent = '';
+    $('#answ2').get(0).nextSibling.textContent = '';
+    $('#answ3').get(0).nextSibling.textContent = '';
+    $('#answ4').get(0).nextSibling.textContent = '';    
 
-questionArr[4] = new Array();
-questionArr[4][0] = "Question 2";
-questionArr[4][1] = "Answer 1";
-questionArr[4][2] = "Answer 2";
-questionArr[4][3] = "Answer 3";
-questionArr[4][4] = "Answer 4";
-questionArr[4][5] = "Correct Answer";
-
-questionArr[5] = new Array();
-questionArr[5][0] = "Question 2";
-questionArr[5][1] = "Answer 1";
-questionArr[5][2] = "Answer 2";
-questionArr[5][3] = "Answer 3";
-questionArr[5][4] = "Answer 4";
-questionArr[5][5] = "Correct Answer";
-
-questionArr[6] = new Array();
-questionArr[6][0] = "Question 2";
-questionArr[6][1] = "Answer 1";
-questionArr[6][2] = "Answer 2";
-questionArr[6][3] = "Answer 3";
-questionArr[6][4] = "Answer 4";
-questionArr[6][5] = "Correct Answer";
-
-questionArr[7] = new Array();
-questionArr[7][0] = "Question 2";
-questionArr[7][1] = "Answer 1";
-questionArr[7][2] = "Answer 2";
-questionArr[7][3] = "Answer 3";
-questionArr[7][4] = "Answer 4";
-questionArr[7][5] = "Correct Answer";
-
-questionArr[8] = new Array();
-questionArr[8][0] = "Question 2";
-questionArr[8][1] = "Answer 1";
-questionArr[8][2] = "Answer 2";
-questionArr[8][3] = "Answer 3";
-questionArr[8][4] = "Answer 4";
-questionArr[8][5] = "Correct Answer";
+    timeCounter = 3;
+    let interval3_un = setInterval(function(){
+        if(timeCounter>0)
+        {
+            $("#showTimer").html("Be ready for next one in: "+timeCounter+" Seconds");
+            timeCounter--;
+        }
+        else{
+            clearInterval(interval3_un);
+            run();
+        }
+    }, 1000);
+}
+run();
